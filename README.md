@@ -1,0 +1,2 @@
+# wapi
+Wealthsimple API
