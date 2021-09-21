@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1'
+VERSION = '0.0.2'
 DESCRIPTION = 'wapi is an open source library that acts as a Wealthsimple Trade API wrapper for python.'
 
 # Setting up
