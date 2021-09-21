@@ -5,7 +5,7 @@ DESCRIPTION = 'wapi is an open source library that acts as a Wealthsimple Trade 
 
 # Setting up
 setup(
-    name="wapi",
+    name="wapi-trade",
     version=VERSION,
     author="Andre Ceschia",
     author_email="andre.ceschia04@gmail.com",
