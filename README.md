@@ -2,7 +2,7 @@
 wapi is an open source library that acts as a Wealthsimple Trade API wrapper for python. 
 
 ## Installation
-    pip install wapi
+    pip install wapi-trade
 
 ## Functions
 wapi can be used to place both market and limit orders, return available account balance, return information on current positions being held, return order information and much more.
