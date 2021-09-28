@@ -9,13 +9,15 @@ class Trade:
         Cloudscraper requests session that holds Wealthsimple session cookies and header information
     token: str
         Bearer authorization token used to validate each request
+    client_id: str
+        client id
 
     Methods
     -------
     login(email, password)
         Logs in to Wealthsimple Trade account
-    refresh()
-        Refreshes Wealthsimple Trade home page to extend the life of the session cookies
+    switch()
+        Switches authorization token to keep session alive, call this function every 20 minutes while the program is running
     get_account_id(account_type)
         Returns account id related to inputted account type: tfsa, rrsp, non-reg, cryto
     get_account_balance(account_type)
@@ -98,6 +100,7 @@ class Trade:
 
             login_data["client_id"] = client_id
             switch_data["client_id"] = client_id
+            self.client_id = client_id
             
             #SENDS THE 2FA EMAIL
             session.post(url=api_login_url, data=login_data)
@@ -118,13 +121,23 @@ class Trade:
 
             return session
 
-    def refresh(self):
+    def switch(self):
         """
         Returns
         -------
         None
         """
-        self.session.get("https://my.wealthsimple.com/app/trade")
+        switch_data = {
+            "profile": "trade",
+            "scope": "invest.read invest.write trade.read trade.write tax.read tax.write",
+            "client_id": self.client_id
+        }
+        switch_url = "https://api.production.wealthsimple.com/v1/oauth/switch"
+
+        response = self.session.post(url=switch_url, json=switch_data).json()
+        
+        self.token = f"{response['token_type']} {response['access_token']}"
+        self.session.headers.update({"Authorization": self.token})
 
     def get_account_id(self, account_type):
         """
