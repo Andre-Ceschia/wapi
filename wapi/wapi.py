@@ -10,7 +10,7 @@ class Trade:
     token: str
         Bearer authorization token used to validate each request
     client_id: str
-        client id
+        Client id
 
     Methods
     -------
@@ -228,6 +228,7 @@ class Trade:
             }
 
         return order
+        
     def get_order(self, order_id, orders=20):
         """
         Parameters
