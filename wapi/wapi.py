@@ -93,7 +93,7 @@ class Trade:
             response = session.get(user_login_url)
 
             soup = BeautifulSoup(response.content, "html.parser")
-            id_url = str(soup.find_all("script")[5]).split("src=\"")[1].split("\"")[0]
+            id_url = str(soup.find_all("script")[4]).split("src=\"")[1].split("\"")[0]
 
             response = session.get(id_url)
             client_id = str(response.text).split("{env:\"production\",clientId:\"")[1].split("\"")[0]
